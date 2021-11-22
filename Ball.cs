@@ -13,7 +13,7 @@ namespace GravityBalls
 		public SolidBrush color;
 		public float radius;
 
-		public static int K = -1;
+		public static int Direction = -1;
 		public static float dt;
 		public Ball(float x, float y, float radius,Vector2 vel, SolidBrush color)
         {
@@ -46,7 +46,7 @@ namespace GravityBalls
 
             if (dist.Length() < World.width * 0.3 && dist.Length() > 30)
             {
-                vel += K * vec * 1000000 * dt / dist.Length();
+                vel += Direction * vec * 1000000 * dt / dist.Length();
                 SimulateForceResistance(0.01f);
             }
         }

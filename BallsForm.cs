@@ -169,7 +169,7 @@ namespace GravityBalls
 		{
 			base.OnMouseMove(e);
 			if (e.Button == MouseButtons.Left)
-				Ball.K *= -1;
+				Ball.Direction *= -1;
 			if (e.Button == MouseButtons.Right)
 				AddBall();
 		}
