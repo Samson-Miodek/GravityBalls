@@ -7,20 +7,20 @@ namespace GravityBalls
 {
 	public class Ball
 	{
-		public Vector2 pos;
-		public Vector2 vel;
+		public Vector2 position;
+		public Vector2 velocity;
 		public Vector2 G;
 		public SolidBrush color;
 		public float radius;
 
 		public static int Direction = -1;
 		public static float dt;
-		public Ball(float x, float y, float radius,Vector2 vel, SolidBrush color)
+		public Ball(float x, float y, float radius,Vector2 velocity, SolidBrush color)
         {
-            this.vel = vel;
+            this.velocity = velocity;
             this.G = new Vector2(0, 9.8f * 30 * (radius));
             this.color = color;
-            this.pos = new Vector2(x, y);
+            this.position = new Vector2(x, y);
             this.radius = radius;
         }
 
@@ -41,29 +41,29 @@ namespace GravityBalls
 
         private void SimulateForceRepulsionFromCursor()
         {
-            var dist = new Vector2(Mouse.x - pos.X, Mouse.y - pos.Y);
+            var dist = new Vector2(Mouse.x - position.X, Mouse.y - position.Y);
             var vec = Vector2.Normalize(dist);
 
             if (dist.Length() < World.width * 0.3 && dist.Length() > 30)
             {
-                vel += Direction * vec * 1000000 * dt / dist.Length();
+                velocity += Direction * vec * 1000000 * dt / dist.Length();
                 SimulateForceResistance(0.01f);
             }
         }
 
         private void UpdPosition()
         {
-            pos += vel * dt;
+            position += velocity * dt;
         }
 
         private void SimulateForceResistance(float k)
         {
-            vel -= vel * k;
+            velocity -= velocity * k;
         }
 
         private void SimulateForceGravity()
         {
-            vel += G * dt;
+            velocity += G * dt;
         }
 
         private void CheckWalls()
@@ -73,26 +73,26 @@ namespace GravityBalls
             var bottomBorder = World.height * 0.98f - radius * 2;
             var upperBorder = radius;
 
-            if (pos.X > rightBorder)
+            if (position.X > rightBorder)
             {
-                pos.X = rightBorder;
-                vel.X *= -1;
+                position.X = rightBorder;
+                velocity.X *= -1;
             }
-            if (pos.X < leftBorder)
+            if (position.X < leftBorder)
             {
-                pos.X = leftBorder;
-                vel.X *= -1;
+                position.X = leftBorder;
+                velocity.X *= -1;
             }
-            if (pos.Y > bottomBorder)
+            if (position.Y > bottomBorder)
             {
-                pos.Y = bottomBorder;
-                vel.Y *= -0.7f;
-                vel.X -= vel.X * 0.01f;
+                position.Y = bottomBorder;
+                velocity.Y *= -0.7f;
+                velocity.X -= velocity.X * 0.01f;
             }
-            if (pos.Y < upperBorder)
+            if (position.Y < upperBorder)
             {
-                pos.Y = upperBorder;
-                vel.Y *= -1;
+                position.Y = upperBorder;
+                velocity.Y *= -1;
             }
         }
     }

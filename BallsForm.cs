@@ -115,8 +115,8 @@ namespace GravityBalls
 
         private void DrawRadiusBall(Graphics g)
         {
-            radiusBall.pos.X = Mouse.x;
-            radiusBall.pos.Y = Mouse.y;
+            radiusBall.position.X = Mouse.x;
+            radiusBall.position.Y = Mouse.y;
             DrawBall(g, radiusBall);
         }
 
@@ -130,20 +130,20 @@ namespace GravityBalls
                 var r1 = ball.radius;
                 var r2 = ball2.radius;
 
-                var v1 = ball.vel;
-                var v2 = ball2.vel;
-                var dist = (ball.pos - ball2.pos);
+                var v1 = ball.velocity;
+                var v2 = ball2.velocity;
+                var dist = (ball.position - ball2.position);
 
                 if (dist.Length() <= r1 + r2)
                 {
-                    ball.vel += (2 * r2 * v2) + v1 * (r1 - r2);
-                    ball.vel /= m;
+                    ball.velocity += (2 * r2 * v2) + v1 * (r1 - r2);
+                    ball.velocity /= m;
 
-                    ball2.vel += (2 * r1 * v1) + v2 * (r2 - r1);
-                    ball2.vel /= m;
+                    ball2.velocity += (2 * r1 * v1) + v2 * (r2 - r1);
+                    ball2.velocity /= m;
 
-                    ball.pos += Vector2.Normalize(dist) * 1.02f;
-                    ball2.pos -= Vector2.Normalize(dist) * 1.02f;
+                    ball.position += Vector2.Normalize(dist) * 1.02f;
+                    ball2.position -= Vector2.Normalize(dist) * 1.02f;
                 }
             }
         }
@@ -151,8 +151,8 @@ namespace GravityBalls
         private static void DrawBall(Graphics graphics, Ball ball)
         {
             graphics.FillEllipse(ball.color,
-                                ball.pos.X - ball.radius,
-                                ball.pos.Y - ball.radius,
+                                ball.position.X - ball.radius,
+                                ball.position.Y - ball.radius,
                                 2 * ball.radius,
                                 2 * ball.radius);
         }
